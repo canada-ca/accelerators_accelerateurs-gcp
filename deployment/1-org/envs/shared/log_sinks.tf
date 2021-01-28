@@ -43,7 +43,7 @@ module "log_export_to_biqquery" {
   version                = "~> 5.0"
   destination_uri        = module.bigquery_destination.destination_uri
   filter                 = local.main_logs_filter
-  log_sink_name          = "sk-c-logging-bq"
+  log_sink_name          = "log_sink-bq"
   parent_resource_id     = local.parent_resource_id
   parent_resource_type   = local.parent_resource_type
   include_children       = true
@@ -69,7 +69,7 @@ module "log_export_to_storage" {
   version                = "~> 5.0"
   destination_uri        = module.storage_destination.destination_uri
   filter                 = local.all_logs_filter
-  log_sink_name          = "sk-c-logging-bkt"
+  log_sink_name          = "org_log_sink"
   parent_resource_id     = local.parent_resource_id
   parent_resource_type   = local.parent_resource_type
   include_children       = true
