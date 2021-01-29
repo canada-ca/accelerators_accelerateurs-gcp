@@ -62,6 +62,7 @@ resource "google_project_iam_member" "audit_log_bq_data_viewer" {
   member  = "group:${var.audit_data_users}"
 }
 
+
 /******************************************
   Billing BigQuery - IAM
 *****************************************/
@@ -86,4 +87,23 @@ resource "google_organization_iam_member" "billing_viewer" {
   org_id = var.org_id
   role   = "roles/billing.viewer"
   member = "group:${var.billing_data_users}"
+}
+
+
+/******************************************
+  SSC CloudBroker Role - IAM
+*****************************************/
+
+module "custom-roles" {
+  source = "terraform-google-modules/iam/google//modules/custom_role_iam"
+
+  target_level         = "org"
+  target_id            = "123456789"
+  role_id              = "custom_role_id"
+  title                = "Custom Role Unique Title"
+  description          = "Custom Role Description"
+  base_roles           = ["roles/iam.serviceAccountAdmin"]
+  permissions          = ["iam.roles.list", "iam.roles.create", "iam.roles.delete"]
+  excluded_permissions = ["iam.serviceAccounts.setIamPolicy"]
+  members              = ["user:user01@domain.com", "group:group01@domain.com"]
 }
