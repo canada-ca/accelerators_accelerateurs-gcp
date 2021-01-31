@@ -1,10 +1,21 @@
-# accelerators_accelerateurs-gcp
-[GCP] Tools and templates to accelerate GC service delivery. Outils et modèles pour accélérer la prestation de services du GC.
+
+# GC Accelerators (GCP)
+
+This repository will host the required tooling for deploying a basic GCP environment to be conformant with the the Government of Canada's [Cloud Guardrails Framework](https://github.com/canada-ca/cloud-guardrails).
+
+The deployment terraform files used to deploy the environments are location in the [deployment folder](./deployment-templates/Terraform) and are based off of the [example organization](https://github.com/terraform-google-modules/terraform-example-foundation) using terraform modules from the [Cloud Foundation Toolkit](https://cloud.google.com/foundation-toolkit).
+
+To deploy the environment please follow the processes outlined in the deployment [README](deployment-templates/README.md)
+
+The [guardails](./guardrails-details) folder contains documentation which describes how compliance with the individual guardrails are achieved.
+
+---
 
 ## How to Contribute
 
 See [CONTRIBUTING.md](CONTRIBUTING.md)
 
+---
 ## License
 
 Unless otherwise noted, the source code of this project is covered under Crown Copyright, Government of Canada, and is distributed under the [MIT License](LICENSE).
