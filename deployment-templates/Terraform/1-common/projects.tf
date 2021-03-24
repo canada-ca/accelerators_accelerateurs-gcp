@@ -4,7 +4,7 @@ module "common" {
   random_project_id           = "true"
   impersonate_service_account = var.terraform_service_account
   default_service_account     = "deprivilege"
-  name                        = "common-base"
+  name                        = "monitoring-reporting"
   org_id                      = var.org_id
   billing_account             = var.billing_account
   folder_id                   = module.folders.id
@@ -13,11 +13,11 @@ module "common" {
   labels = {
     environment       = "production"
     application_name  = "org-logging"
-    billing_code      = "1234"
-    primary_contact   = "example1"
-    secondary_contact = "example2"
-    business_code     = "abcd"
-    env_code          = "p"
+    billing_code      = "1234" # Replace
+    primary_contact   = "example1" # Replace
+    secondary_contact = "example2" # Replace
+    business_code     = "abcd" # Replace
+    env_code          = "p" # Replace
   }
   
   # budget_alert_pubsub_topic   = var.org_audit_logs_project_alert_pubsub_topic

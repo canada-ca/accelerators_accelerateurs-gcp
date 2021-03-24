@@ -35,6 +35,13 @@ resource "random_string" "suffix" {
 }
 
 /******************************************
+  Compliance with Guardrails # 11 
+  https://github.com/canada-ca/cloud-guardrails/blob/master/EN/11_Logging-and-Monitoring.md
+
+  Logs will be sent to BQ and Cloud Storage
+******************************************/
+
+/******************************************
   Send logs to BigQuery
 *****************************************/
 

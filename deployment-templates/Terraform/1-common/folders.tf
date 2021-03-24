@@ -5,18 +5,18 @@ module "folders" {
   parent  = "organizations/${var.org_id}"
 
   names = [
-    "common"
+    "adminstration"
   ]
 
   set_roles = true
 
   per_folder_admins = {
-    common = "group:gcp-developers@domain.com"
+    common = "group:${var.admin_group_users}" #"group:gcp-developers@domain.com"
   }
 
-  # all_folder_admins = [
-  #   "group:gcp-security@domain.com",
-  # ]
+  all_folder_admins = [
+    "group:${var.billing_data_users}",
+  ]
 
   folder_admin_roles = [
     "roles/owner",

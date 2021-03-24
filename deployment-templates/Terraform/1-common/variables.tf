@@ -110,3 +110,34 @@ variable "audit_logs_table_expiration_days" {
   type        = number
   default     = 30
 }
+
+variable "billing_data_users" {
+  description = "G Suite or Cloud Identity group that have access to billing data set."
+  type        = string
+}
+
+variable "data_access_logs_enabled" {
+  description = "Enable Data Access logs of types DATA_READ, DATA_WRITE and ADMIN_READ for all GCP services. Enabling Data Access logs might result in your organization being charged for the additional logs usage. See https://cloud.google.com/logging/docs/audit#data-access"
+  type        = bool
+  default     = true
+}
+
+variable "audit_data_users" {
+  description = "G Suite or Cloud Identity group that have access to audit logs."
+  type        = string
+}
+
+variable "ssc_data_users" {
+  description = "G Suite or Cloud Identity group that have access to SSC requirements."
+  type        = string
+}
+
+variable "admin_group_users" {
+  description = "G Suite or Cloud Identity group that have access to SSC requirements."
+  type        = string
+}
+
+variable "ssc_broker_users" {
+  description = "G Suite or Cloud Identity group that have access to SSC requirements."
+  type        = string
+}
