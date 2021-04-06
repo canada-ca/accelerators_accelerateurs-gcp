@@ -13,13 +13,13 @@ module "common" {
   labels = {
     environment       = "production"
     application_name  = "org-logging"
-    billing_code      = "1234" # Replace
+    billing_code      = "1234"     # Replace
     primary_contact   = "example1" # Replace
     secondary_contact = "example2" # Replace
-    business_code     = "abcd" # Replace
-    env_code          = "p" # Replace
+    business_code     = "abcd"     # Replace
+    env_code          = "p"        # Replace
   }
-  
+
   # budget_alert_pubsub_topic   = var.org_audit_logs_project_alert_pubsub_topic
   # budget_alert_spent_percents = var.org_audit_logs_project_alert_spent_percents
   # budget_amount               = var.org_audit_logs_project_budget_amount

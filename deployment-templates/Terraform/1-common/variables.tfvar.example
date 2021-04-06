@@ -1,0 +1,12 @@
+org_audit_logs_project_alert_spent_percents = [50,25,10]
+org_audit_logs_project_alert_pubsub_topic = "project-alerts"
+admin_group_users="group@email.com"
+audit_data_users="group@email.com"
+org_id="ORG_ID"
+terraform_service_account="service-account@email.com"
+billing_account="BILLING_ACCOUNT"
+billing_data_users="group@email.com"
+ssc_data_users="group@email.com"
+ssc_broker_users="group@email.com"
+audit_logs_table_delete_contents_on_destroy=true
+log_export_storage_force_destroy=false

@@ -65,6 +65,7 @@ module "bigquery_destination" {
   log_sink_writer_identity   = module.log_export_to_biqquery.writer_identity
   expiration_days            = var.audit_logs_table_expiration_days
   delete_contents_on_destroy = var.audit_logs_table_delete_contents_on_destroy
+  location                   = var.default_region
 }
 
 /******************************************

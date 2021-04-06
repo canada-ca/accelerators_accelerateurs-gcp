@@ -85,8 +85,8 @@ resource "google_project_iam_member" "billing_bq_viewer" {
 *****************************************/
 resource "google_organization_iam_member" "ssc-billing" {
   org_id = var.org_id
-  role    = "roles/billing.viewer"
-  member  = "group:${var.ssc_broker_users}"
+  role   = "roles/billing.viewer"
+  member = "group:${var.ssc_broker_users}"
 }
 
 

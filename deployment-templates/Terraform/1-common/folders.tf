@@ -2,7 +2,7 @@ module "folders" {
   source  = "terraform-google-modules/folders/google"
   version = "~> 3.0"
 
-  parent  = "organizations/${var.org_id}"
+  parent = "organizations/${var.org_id}"
 
   names = [
     "adminstration"

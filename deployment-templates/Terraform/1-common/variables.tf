@@ -21,13 +21,13 @@ variable "skip_gcloud_download" {
 
 variable "parent_folder" {
   description = "The resource name of the parent Folder or Organization"
-  default = ""
+  default     = ""
 }
 
 variable "default_region" {
   description = "Default region for BigQuery resources."
   type        = string
-  default = "northamerica-northeast1"
+  default     = "northamerica-northeast1"
 }
 
 variable "dns_hub_project_alert_spent_percents" {

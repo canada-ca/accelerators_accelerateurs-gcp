@@ -30,6 +30,7 @@ Session.vim
 # .tfstate files
 *.tfstate
 *.tfstate.*
+variables.tfvar
 
 # Crash log files
 crash.log

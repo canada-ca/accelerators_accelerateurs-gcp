@@ -5,7 +5,17 @@
 - gcloud sdk >= 206.0.0
 - gsutil
 - Terraform
-
+- Google Cloud Organization
+- Billing Account
+- Permissions
+    - `roles/resourcemanager.organizationAdmin`
+    - `roles/billing.admin`
+- Enabled APIs
+    - `cloudresourcemanager.googleapis.com`
+    - `cloudbilling.googleapis.com`
+    - `iam.googleapis.com`
+    - `storage-api.googleapis.com`
+    - `serviceusage.googleapis.com`
 
 ## Stages
 

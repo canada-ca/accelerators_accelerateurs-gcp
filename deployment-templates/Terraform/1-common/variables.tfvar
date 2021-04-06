@@ -1,2 +1,0 @@
-org_audit_logs_project_alert_spent_percents = [50,25,10]
-org_audit_logs_project_alert_pubsub_topic = "project-alerts"
