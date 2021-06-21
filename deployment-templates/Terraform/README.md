@@ -25,9 +25,9 @@ In this stage you will need to create a project with a valid billing account and
 
 ### Stage 1 - Common Resources
 
-This stage you will deploy the resources listed below using the infrastructure as code utility Terraform
+This stage you will deploy the resources listed below using the infrastructure as code utility Terraform to provide the base needed to deploy the 30 Guardrails.
 
-- Folder and project
+- Guardrails Project
 - BigQuery Instance for log aggregation
 - Log export to BigQuery
 - Storage Bucket for Log storage
@@ -42,12 +42,10 @@ This stage you will deploy the resources listed below using the infrastructure a
     - Billing BQ Viewer
     - SSC Billing Viewer
     - Billing Viewer
+    - Cloud Asset Inventory Viewer
 - Org Policies
     - Resource Location Constraint to prevent resources from being created outside of Canada
 
-### Stage 2 - Business Resources
-
-This stage will deploy the folders and projects for business units to work from.
 
 ## How does using this help enforce the 30 Day Guardrails?
 
