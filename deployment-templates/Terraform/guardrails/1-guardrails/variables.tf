@@ -152,3 +152,9 @@ variable "allowed_regions" {
   type        = list(string)
   default = ["northamerica-northeast1"]
 }
+
+variable "bucket_name" {
+  description = "Name of storage bucket to be created for storing Guardrails Assets"
+  type        = string
+  default = "guardrails-asset-bkt"
+}

@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "${PROJECT}"
+    bucket = "carty-org-seed-project-guardrails"
     prefix = "/orgadmin/seeding/"
   }
 }

@@ -7,7 +7,7 @@
 ## 2) Billing account ID to be used.
 ## 3) Organization ID
 ##########################USAGE
-## sh GCP_seed_project.sh -d 'DEPT NAME' -o orgnaization_id -b 'Billing ID'
+## sh bootstrap.sh -d 'DEPT NAME' -o orgnaization_id -b 'Billing ID'
 ######################################################################
 
 

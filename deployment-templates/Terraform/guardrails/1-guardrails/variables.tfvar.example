@@ -11,3 +11,4 @@ ssc_broker_users="group@email.com"
 audit_logs_table_delete_contents_on_destroy=true
 log_export_storage_force_destroy=false
 allowed_regions=["northamerica-northeast1"]
+bucket_name="guardrails-asset-bkt"
