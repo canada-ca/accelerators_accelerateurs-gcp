@@ -14,10 +14,13 @@ For the easiest path we recommend using Google Cloud Shell to run the deployment
 
 You can access Cloud Shell from the GCP console by clicking console icon in the top right corner
 
-*insert screen shot*
+![console](img/console.png)
 
 This will provision an environment for you to run the commands in.
 
+![cloudshell](img/cloudshell.png)
+
+In the new terminal run the following commands to download the accelerator repository with the bootstrap and terraform scripts.
 ```
 git clone https://github.com/cartyc/accelerators_accelerateurs-gcp.git
 git checkout landingzone-update # temp until merged into main
@@ -50,7 +53,13 @@ This stage includes a bootstrap shell script which will create the following res
 - Storage Bucket to store the terraform state file for the Guardrails scripts
     - This will be needed to run the Guardrails scripts. The default name for this bucket is `guardrails-asset-bkt`.
 
-To run the bootstrap script you will need access to a Linux VM with the [gcloud](https://cloud.google.com/sdk/gcloud) CLI and Org Admin permissions. 
+Assuming you ran the previous steps you should now have the acclererators_accelerateurs-gcp directory in your Cloud Shell enviornment.
+
+Run the following to move to the `guardrails` directory if you haven't already.
+
+```
+cd accelerators_accelerateurs-gcp/deployment-templates/Terraform/guardrails/
+```
 
 To execute the bootstrap script run the following command and populate the ENV Vars with the correct data. 
 
@@ -83,6 +92,35 @@ This stage you will deploy the resources listed below using the infrastructure a
     - Cloud Asset Inventory Viewer
     - Org Policies
     - Resource Location Constraint to prevent resources from being created outside of Canada
+
+To run this section you will need to copy and modify the `variables.tf.exmaple` file to use the correct values for your department and finally run the terraform script.
+
+1. Move to the guardrails dir and copy the `variables.tf.exmaple` file.
+```
+cd 1-guardrails
+cp variables.tfvar.example variables.tfvar
+```
+
+To edit the new file you can either open it in an command line editor like VIM and Nano or you can use the built in Cloud Shell Editor. For this example we will use the Cloud Shell Editor, open it up by first opening the terminal in a new window and then clicking the Open Editor button (this will take a minute or two). Once it is open select `Open Home Workspace` to open home directory in the editor.
+
+![home-workspace](img/home-workspace.png)
+
+Click through the directories to get to the variables file as shown in the below image.
+
+![variables-file](img/variables-file.png)
+
+The information that is pre-populated is just placeholder information. Change the values as required by your organization.
+
+Once the values are updated you can run the Terraform script to provision the necessary infrastructure.
+
+Terraform apply will prompt you for confirmation to proceed.
+
+```
+terraform init
+terraform apply -var-file variables.tfvar
+```
+
+Once the script completes you will have the necessary resources to proceed with the guardrails installation.
 
 ## How does using this help enforce the 30 Day Guardrails?
 
