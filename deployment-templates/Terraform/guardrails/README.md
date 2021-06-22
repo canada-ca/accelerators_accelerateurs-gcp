@@ -101,7 +101,11 @@ cd 1-guardrails
 cp variables.tfvar.example variables.tfvar
 ```
 
-To edit the new file you can either open it in an command line editor like VIM and Nano or you can use the built in Cloud Shell Editor. For this example we will use the Cloud Shell Editor, open it up by first opening the terminal in a new window and then clicking the Open Editor button (this will take a minute or two). Once it is open select `Open Home Workspace` to open home directory in the editor.
+To edit the new file you can either open it in an command line editor like VIM and Nano or you can use the built in Cloud Shell Editor. 
+
+![cloudshell-editor](img/cloudshell-editor.png)
+
+For this example we will use the Cloud Shell Editor, open it up by first opening the terminal in a new window and then clicking the Open Editor button (this will take a minute or two). Once it is open select `Open Home Workspace` to open home directory in the editor.
 
 ![home-workspace](img/home-workspace.png)
 
