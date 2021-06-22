@@ -7,7 +7,10 @@ The deployment terraform files used to deploy the environments are location in t
 
 To deploy the environment please follow the processes outlined in the deployment [README](deployment-templates/README.md)
 
-The [guardails](./guardrails-details) folder contains documentation which describes how compliance with the individual guardrails are achieved.
+The [guardails](./guardrail-details) folder contains documentation which describes how compliance with the individual guardrails are achieved.
+
+Currently Available Accelerators
+- Guardrails ([link](deployment-templates/Terraform/Guardrails))
 
 ---
 
