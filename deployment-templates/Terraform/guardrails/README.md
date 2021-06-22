@@ -5,10 +5,24 @@
 - gcloud sdk >= 206.0.0
 - gsutil
 - Terraform
+- git
 - Google Cloud Organization
 
+## Setting up your Environment
 
-## Stages
+For the easiest path we recommend using Google Cloud Shell to run the deployment as all of the above dependancies are already provided.
+
+You can access Cloud Shell from the GCP console by clicking console icon in the top right corner
+
+*insert screen shot*
+
+This will provision an environment for you to run the commands in.
+
+```
+git clone https://github.com/cartyc/accelerators_accelerateurs-gcp.git
+git checkout landingzone-update # temp until merged into main
+cd accelerators_accelerateurs-gcp/deployment-templates/Terraform/guardrails/
+``` 
 
 ### Stage 0 - Bootstrap
 
@@ -38,11 +52,13 @@ This stage includes a bootstrap shell script which will create the following res
 
 To run the bootstrap script you will need access to a Linux VM with the [gcloud](https://cloud.google.com/sdk/gcloud) CLI and Org Admin permissions. 
 
-- Install gcloud
-- Install gsutil
+To execute the bootstrap script run the following command and populate the ENV Vars with the correct data. 
 
 ```
-sh 0-bootstrap/bootstrap.sh -d 'DEPT NAME' -o orgnaization_id -b 'Billing ID'
+DEPT_NAME=<your-department-name>
+ORG_ID=<your-gcp-org-id>
+BILLING_ID=<your-billing-id>
+sh 0-bootstrap/bootstrap.sh -d '${DEPT_NAME}' -o $ORG_ID -b '${BILLING_ID}'
 ```
 
 ### Stage 1 - Common Resources
@@ -67,11 +83,6 @@ This stage you will deploy the resources listed below using the infrastructure a
     - Cloud Asset Inventory Viewer
     - Org Policies
     - Resource Location Constraint to prevent resources from being created outside of Canada
-
-ToDo
-- Install Terraform
-- Terraform Init
-- Terraform Apply
 
 ## How does using this help enforce the 30 Day Guardrails?
 
