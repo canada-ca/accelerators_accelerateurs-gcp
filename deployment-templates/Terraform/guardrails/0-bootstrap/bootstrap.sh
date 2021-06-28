@@ -97,6 +97,7 @@ echo "gs://${seed_project_id}-guardrails"
 gsutil mb -l northamerica-northeast1 -p ${seed_project_id} gs://${seed_project_id}-guardrails
 
 # Step 6 Grant Current User Accounts to Storage Bucket
+USER=$(gcloud config get-value account)
 gsutil iam ch user:${USER}:objectCreator "gs://${seed_project_id}-guardrails"
 
 }
