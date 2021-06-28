@@ -12,7 +12,21 @@
 
 
 #!bin/bash
+cmd_org_list="gcloud organizations list"
+cmd_billing_list="gcloud alpha billing accounts list"
+usage()
+{
+    echo "usage: <command> options:<d|o|b|i>"
+    echo "syntax: sh bootstrap.sh -d DEPT_NAME -o orgnaization_id -b Billing_ID"
+    echo "exmaple sh bootstrap.sh -d SSC -o 1234567891011 -b ######-######-######"
+    echo "*** NOTE *** : Using the -i flag with either \"billing\" or \"org\" gives output based on current gcloud settings" 
+    echo "             : sh bootstrap.sh -i org"
+    echo "             : sh bootstrap.sh -i billing"
+    echo "Organisation ID avaialble using 'gcloud organizations list'"
+    echo "Billing ID Avaialble using 'gcloud alpha billing accounts list'"
+}
 
+no_args="true"
 while getopts "d:o:b:" flag;
 do
     case "${flag}" in
@@ -74,6 +88,12 @@ gsutil mb -l northamerica-northeast1 -p ${seed_project_id} gs://${seed_project_i
 
 
 main () {
+
+if [ $# -eq 0 ];
+then
+usage
+exit 1
+fi
 
 seed_gcp
 status=$?
