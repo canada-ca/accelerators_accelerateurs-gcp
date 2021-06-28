@@ -33,8 +33,20 @@ do
         d) dpt=${OPTARG};;
         o) org_id=${OPTARG};;
         b) billing_id=${OPTARG};;
+        *) usage
+           exit 1
+           ;;
     esac
+    no_args="false"
 done
+
+# Exit script and print usage if no arguments are passed.
+if [[ $no_args == true ]]; then
+    usage
+    exit 1
+fi
+
+
 seed_project_id="${dpt}-seed-project"
 #echo "seed project id: $seed_project_id";
 #echo "org id: $org_id";
@@ -84,16 +96,13 @@ gcloud organizations add-iam-policy-binding ${org_id}  --member=serviceAccount:$
 echo "gs://${seed_project_id}-guardrails"
 gsutil mb -l northamerica-northeast1 -p ${seed_project_id} gs://${seed_project_id}-guardrails
 
+# Step 6 Grant Current User Accounts to Storage Bucket
+gsutil iam ch user:${USER}:objectCreator "gs://${seed_project_id}-guardrails"
+
 }
 
 
 main () {
-
-if [ $# -eq 0 ];
-then
-usage
-exit 1
-fi
 
 seed_gcp
 status=$?
