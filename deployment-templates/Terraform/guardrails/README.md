@@ -23,8 +23,8 @@ This will provision an environment for you to run the commands in.
 In the new terminal run the following commands to download the accelerator repository with the bootstrap and terraform scripts.
 ```
 git clone https://github.com/cartyc/accelerators_accelerateurs-gcp.git
+cd accelerators_accelerateurs-gcp/
 git checkout landingzone-update # temp until merged into main
-cd accelerators_accelerateurs-gcp/deployment-templates/Terraform/guardrails/
 ``` 
 
 ### Stage 0 - Bootstrap
@@ -58,7 +58,7 @@ Assuming you ran the previous steps you should now have the acclererators_accele
 Run the following to move to the `guardrails` directory if you haven't already.
 
 ```
-cd accelerators_accelerateurs-gcp/deployment-templates/Terraform/guardrails/
+cd deployment-templates/Terraform/guardrails/
 ```
 
 To execute the bootstrap script run the following command and populate the ENV Vars with the correct data. 
@@ -69,6 +69,14 @@ ORG_ID=<your-gcp-org-id>
 BILLING_ID=<your-billing-id>
 sh 0-bootstrap/bootstrap.sh -d '${DEPT_NAME}' -o $ORG_ID -b '${BILLING_ID}'
 ```
+
+To get the Organization ID you can run `gcloud organizations list`. The output should be similar to the below
+```
+DISPLAY_NAME                            ID  DIRECTORY_CUSTOMER_ID
+myorg-name  1234567891011              customerid
+```
+
+The second value(`1234567891011`) will be the Organization ID that is needed.
 
 ### Stage 1 - Common Resources
 

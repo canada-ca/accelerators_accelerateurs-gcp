@@ -112,6 +112,7 @@ if [ $status == 0 ]
 then
 echo "GCP seed project created project id: ""${seed_project_id} \n"
 echo " Terraform Service account to be used for creating GCP landing zone = " "${act} \n"
+echo " Terraform Backend Storage Bucket: gs://${seed_project_id}-guardrails" 
 echo " Please follow instructions to setup Terraform service account keys before launching Terraform scripts."
 else
 echo " GCP service account creation failed. Please debug and rerun"
