@@ -71,18 +71,6 @@ variable "org_billing_logs_project_budget_amount" {
   default     = 1000
 }
 
-variable "org_audit_logs_project_alert_spent_percents" {
-  description = "A list of percentages of the budget to alert on when threshold is exceeded for the org audit logs project."
-  type        = list(number)
-  default     = [0.5, 0.75, 0.9, 0.95]
-}
-
-variable "org_audit_logs_project_alert_pubsub_topic" {
-  description = "The name of the Cloud Pub/Sub topic where budget related messages will be published, in the form of `projects/{project_id}/topics/{topic_id}` for the org audit logs project."
-  type        = string
-  default     = null
-}
-
 variable "log_export_storage_force_destroy" {
   description = "(Optional) If set to true, delete all contents when destroying the resource; otherwise, destroying the resource will fail if contents are present."
   type        = bool
@@ -129,16 +117,6 @@ variable "data_access_logs_enabled" {
 
 variable "audit_data_users" {
   description = "G Suite or Cloud Identity group that have access to audit logs."
-  type        = string
-}
-
-variable "ssc_data_users" {
-  description = "G Suite or Cloud Identity group that have access to SSC requirements."
-  type        = string
-}
-
-variable "admin_group_users" {
-  description = "G Suite or Cloud Identity group that have access to SSC requirements."
   type        = string
 }
 

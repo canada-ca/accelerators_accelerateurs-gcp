@@ -122,6 +122,31 @@ Click through the directories to get to the variables file as shown in the below
 ![variables-file](img/variables-file.png)
 
 The information that is pre-populated is just placeholder information. Change the values as required by your organization.
+| Variable  | Description  | Default  |
+|---|---|---|
+| org_id | The organization ID. | `none` |
+| billing_account | The ID of the billing account to associate this project with | "BILLING_ID" |
+| terraform_service_account | The account which terraform will use to provision the infrastructure. This will be created with the bootstrap script | "tfadmin-DEPT@SEEDPROJECT.iam.gserviceaccount.com" |
+| billing_data_users | User group who has access to view billing data | "billing-group@email.com" |
+| ssc_broker_users | User group to be used for SSC access. | "ssc-broker-group@email.com" |
+| log_export_storage_force_destroy | When deleting a bucket, this boolean option will delete all contained objects. | `true` |
+| allowed_regions | Regions that resources will be allowed to deploy to. See [here](https://cloud.google.com/compute/docs/regions-zones) for a list of GCP regions. | ["northamerica-northeast1"]  |
+| bucket_name | The storage bucket name to be used with the Guardrails Validation tool. This needs to be Globally Unique. | `guardrails-asset-bkt` |
+
+
+The Billing Data and SSC Broker groups will need to be created in Cloud Identity first or the script will fail. To create the groups navigate to your [Google Admin Portal](admin.google.com) and click on the groups card.
+
+![groups](img/groups.png)
+
+Once in the groups menu you can click the create button to start creating your new group.
+
+![new groups](img/groups-create-btn.png)
+
+Now you will need to fill out the form as shown below to create the group.
+
+![new groups form](img/groups-create.png)
+
+Repeat this for both groups and when you have the emails you can update the `variables.tfvar` file with the new emails.
 
 Once the values are updated you can run the Terraform script to provision the necessary infrastructure.
 
@@ -132,7 +157,7 @@ terraform init
 terraform apply -var-file variables.tfvar
 ```
 
-Once the script completes you will have the necessary resources to proceed with the guardrails installation.
+Once the script completes you will have the necessary resources to proceed with the guardrails installation. This process should take about 5 minutes.
 
 ## How does using this help enforce the 30 Day Guardrails?
 

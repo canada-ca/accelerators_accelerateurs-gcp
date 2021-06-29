@@ -20,7 +20,4 @@ module "administration"{
     env_code          = "p"        # Replace
   }
 
-  # budget_alert_pubsub_topic   = var.org_audit_logs_project_alert_pubsub_topic
-  # budget_alert_spent_percents = var.org_audit_logs_project_alert_spent_percents
-  # budget_amount               = var.org_audit_logs_project_budget_amount
 }
