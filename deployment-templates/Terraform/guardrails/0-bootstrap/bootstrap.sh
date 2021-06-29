@@ -94,18 +94,23 @@ gcloud organizations add-iam-policy-binding ${org_id}  --member=serviceAccount:$
 
 # Step 5 Create Storage Bucket for Guardrails
 echo "gs://${seed_project_id}-guardrails"
-gsutil mb -l northamerica-northeast1 -p ${seed_project_id} gs://${seed_project_id}-bootstrap
+gsutil mb -l northamerica-northeast1 -p ${seed_project_id} gs://${seed_project_id}-guardrails
+echo "Replace backend.tf bucketname"
+sed -i "s/BUCKETNAME/${seed_project_id}-guardrails/g" ${HOME}/accelerators_accelerateurs-gcp/deployment-templates/Terraform/guardrails/1-guardrails/backend.tf
 
 # Step 6 Grant Current User Accounts to Storage Bucket
 USER=$(gcloud config get-value account)
-gsutil iam ch user:${USER}:objectCreator "gs://${seed_project_id}-bootstrap"
+gsutil iam ch user:${USER}:objectCreator "gs://${seed_project_id}-guardrails"
 
-# Step 7 Set Terraform Bucket Name in `backend.tf`
-echo "Replace backend.tf bucketname"
-sed -i "s/BUCKETNAME/${seed_project_id}-bootstrap/g" ${HOME}/accelerators_accelerateurs-gcp/deployment-templates/Terraform/guardrails/1-guardrails/backend.tf
-
-# Step 8 Set Project Context
+# Step 7 Set Project Context
 gcloud config set project "${seed_project_id}"
+
+# Step 8 Set Base `variables.tfvars`
+cp ${HOME}/accelerators_accelerateurs-gcp/deployment-templates/Terraform/guardrails/1-guardrails/variables.tfvar.example ${HOME}/accelerators_accelerateurs-gcp/deployment-templates/Terraform/guardrails/1-guardrails/variables.tfvar
+sed -i "s/BILLING_ACCOUNT/${billing_id}/g" ${HOME}/accelerators_accelerateurs-gcp/deployment-templates/Terraform/guardrails/1-guardrails/variables.tfvar
+sed -i "s/ORG_ID/${org_id}/g" ${HOME}/accelerators_accelerateurs-gcp/deployment-templates/Terraform/guardrails/1-guardrails/variables.tfvar
+sed -i "s/service-account@email.com/${act}/g" ${HOME}/accelerators_accelerateurs-gcp/deployment-templates/Terraform/guardrails/1-guardrails/variables.tfvar
+sed -i "s/guardrails-asset-bkt/${dpt}-guardrails-assets/g" ${HOME}/accelerators_accelerateurs-gcp/deployment-templates/Terraform/guardrails/1-guardrails/variables.tfvar
 
 }
 
