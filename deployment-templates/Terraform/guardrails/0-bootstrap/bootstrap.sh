@@ -63,15 +63,29 @@ tf="tfadmin-${dpt}"
 
 
 #Step1 Create GCP seed Project
+PROJ_EXISTS=$(gcloud projects list --filter ${seed_project_id})
+if [ -z "$PROJ_EXISTS" ]
+then
 gcloud projects create "${seed_project_id}" --organization=${org_id}  --quiet
+else
+echo "Project already exists and will be reused to provision resources"
+fi
 
 #Step 2 : Associate billing id with project
 gcloud beta billing projects link "${seed_project_id}" --billing-account "${billing_id}" --quiet
 
 #Step 3 Create Terraform service account
+TF_SA_EXISTS=$(gcloud iam service-accounts list --filter $tf)
+if [ -z "$TF_SA_EXISTS" ]
+then
 gcloud iam service-accounts create "${tf}" --display-name "Terraform admin account" --project=${seed_project_id} --quiet
 act=`gcloud iam service-accounts list --project="${seed_project_id}" --filter=tfadmin --format="value(email)"`
+else
+echo "TF SA Already exists"
+act=`gcloud iam service-accounts list --project="${seed_project_id}" --filter=tfadmin --format="value(email)"`
+fi
 
+echo $act
 #Step 4 Assign org level and project level role to TF account
 gcloud organizations add-iam-policy-binding ${org_id}  --member=serviceAccount:${act} \
     --role=roles/billing.user \
