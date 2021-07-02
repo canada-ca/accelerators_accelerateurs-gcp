@@ -10,7 +10,7 @@ To deploy the environment please follow the processes outlined in the deployment
 The `guardails-details` folder contains documentation which describes how compliance with the individual guardrails are achieved.
 
 Currently Available Accelerators
-- Guardrails ([link](https://github.com/canada-ca/accelerators_accelerateurs-gcp/tree/main/deployment-templates/Terraform/guardrails)
+- Guardrails ([link](https://github.com/canada-ca/accelerators_accelerateurs-gcp/tree/main/deployment-templates/Terraform/guardrails))
 
 ---
 
