@@ -3,7 +3,7 @@
 ### Establish policies to restrict GC sensitive workloads to approved geographic locations
 
 
-The deployment template provides variables to set defaults. One of the variables is default_region which defines the default region to create resources. By setting the default to Montreal which is northamerica-northeast1 then the resource creation will be restricted to only that region. For details on the template please see [Bootstrap Template](../deployment-templates/Terraform/guardrails/org-policy.tf)
+The deployment template provides variables to set defaults. One of the variables is default_region which defines the default region to create resources. By setting the default to Montreal which is northamerica-northeast1 then the resource creation will be restricted to only that region. For details on the template please see [Bootstrap Template](../../deployment-templates/Terraform/guardrails/org-policy.tf)
 
     
 ### Restricting Resource on the entire Organization<BR>
