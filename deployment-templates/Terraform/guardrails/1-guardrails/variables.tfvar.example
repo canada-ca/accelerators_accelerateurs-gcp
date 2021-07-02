@@ -1,0 +1,10 @@
+audit_data_users="group@email.com"
+ssc_broker_users="group@email.com"
+org_id="ORG_ID"
+terraform_service_account="service-account@email.com"
+billing_account="BILLING_ACCOUNT"
+billing_data_users="group@email.com"
+audit_logs_table_delete_contents_on_destroy=true
+log_export_storage_force_destroy=true
+allowed_regions=["northamerica-northeast1"]
+bucket_name="guardrails-asset-bkt"
