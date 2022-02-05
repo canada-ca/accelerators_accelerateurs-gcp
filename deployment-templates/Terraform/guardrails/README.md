@@ -24,7 +24,6 @@ In the new terminal run the following commands to download the accelerator repos
 ```
 git clone https://github.com/cartyc/accelerators_accelerateurs-gcp.git
 cd accelerators_accelerateurs-gcp/
-git checkout landingzone-update # temp until merged into main
 ``` 
 
 ### Stage 0 - Bootstrap
