@@ -100,13 +100,13 @@ This stage you will deploy the resources listed below using the infrastructure a
     - Org Policies
     - Resource Location Constraint to prevent resources from being created outside of Canada
 
-To run this section you will need to copy and modify the `variables.tf.exmaple` file to use the correct values for your department and finally run the terraform script.
+To run this section you will need to adjust the generated `variables.tfvar` file to use the correct values for your department and finally run the terraform script.
 
-1. Move to the guardrails dir and copy the `variables.tf.exmaple` file.
+1. Move to the guardrails dir and prepare to edit the partially generated `variables.tfvar` file.
 ```
 cd 1-guardrails
-cp variables.tfvar.example variables.tfvar
 ```
+
 
 To edit the new file you can either open it in an command line editor like VIM and Nano or you can use the built in Cloud Shell Editor. 
 
