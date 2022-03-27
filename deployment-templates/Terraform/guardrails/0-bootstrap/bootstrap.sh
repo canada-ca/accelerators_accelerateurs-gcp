@@ -61,6 +61,9 @@ act=""
 
 seed_gcp () {
 
+# reset project from seed project - if rerunning script
+gcloud config set project "${project_id}"
+
 # verify super admin account has proper roles to use the terraform service account
 EMAIL=`gcloud config list account --format "value(core.account)"`
 echo "checking roles of current account: ${EMAIL}"
@@ -101,6 +104,10 @@ else
 fi
 
 tf="tfadmin-${dpt}"
+
+# enable services on current project
+echo "enabling pubsub.googleapis.com identitytoolkit cloudresourcemanager iam cloudbilling on $project_id project"
+gcloud services enable pubsub.googleapis.com identitytoolkit.googleapis.com cloudresourcemanager.googleapis.com cloudbilling.googleapis.com iam.googleapis.com
 
 #Step1 Create GCP seed Project
 PROJ_EXISTS=$(gcloud projects list --filter ${seed_project_id})
@@ -169,6 +176,7 @@ gcloud config set project "${seed_project_id}"
 
 # Step 8 Set Base `variables.tfvars`
 # don't assume the project is off the home dir - it could be off cloudshell_open
+# will overwrite the 3 emails on reentry
 cp ../1-guardrails/variables.tfvar.example ../1-guardrails/variables.tfvar
 sed -i "s/BILLING_ACCOUNT/${billing_id}/g" ../1-guardrails/variables.tfvar
 sed -i "s/ORG_ID/${org_id}/g" ../1-guardrails/variables.tfvar
@@ -178,11 +186,17 @@ sed -i "s/YOUR_SERVICE_ACCOUNT/${act}/g" ../1-guardrails/provider.tf
 echo "wrote TF SA to provider.tf and variables.tfvar along with the bucket, billing account and org id - verify them"
 
 # services to enable on both projects (guardrails and seed)
-echo "enabling pubsub.googleapis.com identitytoolkit.googleapis.com cloudresourcemanager.googleapis.com on seed project"
-gcloud services enable pubsub.googleapis.com identitytoolkit.googleapis.com cloudresourcemanager.googleapis.com
+
+echo "enabling pubsub identitytoolkit cloudresourcemanager iam cloudbilling on ${seed_project_id} project"
+gcloud services enable pubsub.googleapis.com identitytoolkit.googleapis.com cloudresourcemanager.googleapis.com cloudbilling.googleapis.com iam.googleapis.com
 gcloud services list --enabled --project "${seed_project_id}" | grep cloudresourcemanager.googleapis.com
 gcloud services list --enabled --project "${seed_project_id}" | grep identitytoolkit.googleapis.com
 gcloud services list --enabled --project "${seed_project_id}" | grep pubsub.googleapis.com
+gcloud services list --enabled --project "${seed_project_id}" | grep cloudbilling.googleapis.com
+## set on both seed and guardrails project
+gcloud services list --enabled --project "${seed_project_id}" | grep iam.googleapis.com
+
+echo "if you get an iam permission on the guardrails-aaaa project - run gcloud services enable iam.googleapis.com  --project guardrails-nnnn"
 
 }
 
