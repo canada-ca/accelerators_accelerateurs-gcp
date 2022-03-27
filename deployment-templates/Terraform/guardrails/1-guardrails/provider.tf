@@ -36,5 +36,5 @@ data "google_service_account_access_token" "default" {
   lifetime               = "3600s"
 }
 
-# written from bootstrap.sh in form SERVICE_ACCOUNT@PROJECT.iam.gserviceaccount.com
-# locals { terraform_service_account = "YOUR_SERVICE_ACCOUNT" }
+# written from bootstrap.sh via YOUR_SERVICE_ACCOUNT in form SERVICE_ACCOUNT@PROJECT.iam.gserviceaccount.com
+locals { terraform_service_account = "YOUR_SERVICE_ACCOUNT" }
