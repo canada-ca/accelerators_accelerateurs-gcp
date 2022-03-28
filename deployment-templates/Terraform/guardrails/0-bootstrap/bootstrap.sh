@@ -29,6 +29,23 @@ usage()
     echo "./bootstrap.sh -d ssc -p accelerator-dev"
 }
 
+getrole()
+{
+    array=( iam.serviceAccountTokenCreator roles/resourcemanager.folderAdmin roles/resourcemanager.organizationAdmin orgpolicy.policyAdmin resourcemanager.projectCreator billing.projectManager )
+    for i in "${array[@]}"
+    do
+	    echo "$i"
+        ROLE=`gcloud organizations get-iam-policy $1 --filter="bindings.members:$2" --flatten="bindings[].members" --format="table(bindings.role)" | grep $i`
+        if [ -z "$ROLE" ]
+        then
+            echo "roles/$i role missing"
+            exit 1
+        else
+            echo "${ROLE} role set OK on super admin account"
+        fi  
+done
+}
+
 no_args="true"
 while getopts "d:p:" flag;
 do
@@ -67,41 +84,9 @@ gcloud config set project "${project_id}"
 # verify super admin account has proper roles to use the terraform service account
 EMAIL=`gcloud config list account --format "value(core.account)"`
 echo "checking roles of current account: ${EMAIL}"
-ALL_REQUIRED_SUPER_ADMIN_ROLES_EXIST=""
-SERVICE_ACCOUNT_TOKEN_CREATOR_ROLE=`gcloud organizations get-iam-policy $org_id --filter="bindings.members:${EMAIL}" --flatten="bindings[].members" --format="table(bindings.role)" | grep serviceAccountTokenCreator`
-if [ -z "$SERVICE_ACCOUNT_TOKEN_CREATOR_ROLE" ]
-then
-    echo "roles/iam.serviceAccountTokenCreator role missing"
-    ALL_REQUIRED_SUPER_ADMIN_ROLES_EXIST="0"
-else
-    echo "${SERVICE_ACCOUNT_TOKEN_CREATOR_ROLE} role set OK on super admin account"
-fi  
 
-SERVICE_ACCOUNT_TOKEN_CREATOR_ROLE=`gcloud organizations get-iam-policy $org_id --filter="bindings.members:${EMAIL}" --flatten="bindings[].members" --format="table(bindings.role)" | grep folderAdmin`
-if [ -z "$SERVICE_ACCOUNT_TOKEN_CREATOR_ROLE" ]
-then
-    echo "roles/resourcemanager.folderAdmin role missing"
-    ALL_REQUIRED_SUPER_ADMIN_ROLES_EXIST="0"
-else
-    echo "${SERVICE_ACCOUNT_TOKEN_CREATOR_ROLE} role set OK on super admin account"
-fi  
-
-SERVICE_ACCOUNT_TOKEN_CREATOR_ROLE=`gcloud organizations get-iam-policy $org_id --filter="bindings.members:${EMAIL}" --flatten="bindings[].members" --format="table(bindings.role)" | grep organizationAdmin`
-if [ -z "$SERVICE_ACCOUNT_TOKEN_CREATOR_ROLE" ]
-then
-    echo "roles/resourcemanager.organizationAdmin role missing"
-    ALL_REQUIRED_SUPER_ADMIN_ROLES_EXIST="0"
-else
-    echo "${SERVICE_ACCOUNT_TOKEN_CREATOR_ROLE} role set OK on super admin account"
-fi  
-
-if [ -z "$ALL_REQUIRED_SUPER_ADMIN_ROLES_EXIST" ]
-then
-  echo "all roles set OK on super admin account:  ${EMAIL} - proceeding"
-else
-  echo "missing roles listed above on the super admin account:  ${EMAIL}"
-  exit 1;
-fi
+getrole $org_id $EMAIL
+echo "all roles set OK on super admin account:  ${EMAIL} - proceeding"
 
 tf="tfadmin-${dpt}"
 
@@ -186,7 +171,6 @@ sed -i "s/YOUR_SERVICE_ACCOUNT/${act}/g" ../1-guardrails/provider.tf
 echo "wrote TF SA to provider.tf and variables.tfvar along with the bucket, billing account and org id - verify them"
 
 # services to enable on both projects (guardrails and seed)
-
 echo "enabling pubsub identitytoolkit cloudresourcemanager iam cloudbilling on ${seed_project_id} project"
 gcloud services enable pubsub.googleapis.com identitytoolkit.googleapis.com cloudresourcemanager.googleapis.com cloudbilling.googleapis.com iam.googleapis.com
 gcloud services list --enabled --project "${seed_project_id}" | grep cloudresourcemanager.googleapis.com
@@ -196,7 +180,7 @@ gcloud services list --enabled --project "${seed_project_id}" | grep cloudbillin
 ## set on both seed and guardrails project
 gcloud services list --enabled --project "${seed_project_id}" | grep iam.googleapis.com
 
-echo "if you get an iam permission on the guardrails-aaaa project - run gcloud services enable iam.googleapis.com  --project guardrails-nnnn"
+echo "if you get an iam permission on the guardrails-aaaa project - run gcloud services enable iam.googleapis.com --project guardrails-nnnn"
 
 }
 
@@ -211,8 +195,6 @@ then
 echo "GCP seed project created project id: ""${seed_project_id} \n"
 echo " Terraform Service account to be used for creating GCP landing zone = " "${act} \n"
 echo " Terraform Backend Storage Bucket: gs://${seed_project_id}-guardrails" 
-#echo " Please follow instructions to setup Terraform service account keys before launching Terraform scripts."
-#echo " https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/getting_started"
 else
 echo " GCP service account creation failed. Please debug and rerun"
 fi
