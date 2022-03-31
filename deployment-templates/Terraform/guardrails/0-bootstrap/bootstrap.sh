@@ -4,35 +4,34 @@
 ## 2) Provision a Terraform service account with required permissions in the seed project
 ######################VARIABLES
 ## 1) Dept naming convention. = This will be suffix of seed project dept-seed-project
-## 2) Billing account ID to be used.
-## 3) Organization ID
+## 2) organization and billing IDs will be derived via the supplied bootstrap project-id
 ##########################USAGE
-## sh bootstrap.sh -d 'DEPT NAME' -o orgnaization_id -b 'Billing ID'
+## sh bootstrap.sh -d 'DEPT NAME' -p project-id 
+## Before running the script
+##
+## add roles to super admin user (in addition to Organization Administrator)
+## Folder Admin
+## Organization Policy Admin
+## Project Billing Manager
+## Project Creator
+## optional Security Center Admin and Support Account Administrator
 ######################################################################
 
-
 #!bin/bash
-cmd_org_list="gcloud organizations list"
-cmd_billing_list="gcloud alpha billing accounts list"
+
 usage()
 {
-    echo "usage: <command> options:<d|o|b|i>"
-    echo "syntax: sh bootstrap.sh -d DEPT_NAME -o orgnaization_id -b Billing_ID"
-    echo "exmaple sh bootstrap.sh -d SSC -o 1234567891011 -b ######-######-######"
-    echo "*** NOTE *** : Using the -i flag with either \"billing\" or \"org\" gives output based on current gcloud settings" 
-    echo "             : sh bootstrap.sh -i org"
-    echo "             : sh bootstrap.sh -i billing"
-    echo "Organisation ID avaialble using 'gcloud organizations list'"
-    echo "Billing ID Avaialble using 'gcloud alpha billing accounts list'"
+    echo "usage: <command> options:<d|p>"
+    echo "syntax: sh bootstrap.sh -d DEPT_NAME -p PROJECT_ID"
+    echo "example sh bootstrap.sh -d SSC -p accelerator-dev"
 }
 
 no_args="true"
-while getopts "d:o:b:" flag;
+while getopts "d:p:" flag;
 do
     case "${flag}" in
         d) dpt=${OPTARG};;
-        o) org_id=${OPTARG};;
-        b) billing_id=${OPTARG};;
+        p) project_id=${OPTARG};;
         *) usage
            exit 1
            ;;
@@ -46,21 +45,20 @@ if [[ $no_args == true ]]; then
     exit 1
 fi
 
+org_id=$(gcloud projects get-ancestors $project_id --format='get(id)' | tail -1)
+billing_id=$(gcloud alpha billing projects describe $project_id '--format=value(billingAccountName)' | sed 's/.*\///')
 
 seed_project_id="${dpt}-seed-project"
-#echo "seed project id: $seed_project_id";
-#echo "org id: $org_id";
-#echo "billing id: $billing_id";
+echo "seed project id: $seed_project_id";
+echo "boostrap project id: $project_id";
+echo "org id: $org_id";
+echo "billing id: $billing_id";
 
 act=""
-
-
-
 
 seed_gcp () {
 
 tf="tfadmin-${dpt}"
-
 
 #Step1 Create GCP seed Project
 PROJ_EXISTS=$(gcloud projects list --filter ${seed_project_id})
@@ -140,6 +138,7 @@ echo "GCP seed project created project id: ""${seed_project_id} \n"
 echo " Terraform Service account to be used for creating GCP landing zone = " "${act} \n"
 echo " Terraform Backend Storage Bucket: gs://${seed_project_id}-guardrails" 
 echo " Please follow instructions to setup Terraform service account keys before launching Terraform scripts."
+echo " https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/getting_started"
 else
 echo " GCP service account creation failed. Please debug and rerun"
 fi
