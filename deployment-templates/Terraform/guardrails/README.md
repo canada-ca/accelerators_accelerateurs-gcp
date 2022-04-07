@@ -3,16 +3,19 @@
 ## Prerequisites
 
 - gcloud sdk >= 206.0.0
-- gsutil
-- Terraform
-- git
-- Google Cloud Organization
+- gsutil (included in shell.cloud.google.com)
+- Terraform (included in shell.cloud.google.com)
+- git (included in shell.cloud.google.com)
+- A Google Cloud Organization
 
 ## Setting up your Environment
 
-For the easiest path we recommend using Google Cloud Shell to run the deployment as all of the above dependancies are already provided.
+For the easiest path we recommend using Google [Cloud Shell](https://shell.cloud.google.com) to run the deployment as all of the above dependancies are already provided.
 
-You can access Cloud Shell from the GCP console by clicking console icon in the top right corner
+You can access Cloud Shell from the GCP console by clicking console icon in the top right corner.
+
+Or run the following to open the shell and auto clone
+[![Open this project in Google Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/fmichaelobrien/accelerators_accelerateurs-gcp&page=editor&tutorial=README.md)
 
 ![console](img/console.png)
 
@@ -22,7 +25,7 @@ This will provision an environment for you to run the commands in.
 
 In the new terminal run the following commands to download the accelerator repository with the bootstrap and terraform scripts.
 ```
-git clone https://github.com/cartyc/accelerators_accelerateurs-gcp.git
+git clone https://github.com/canada-ca/accelerators_accelerateurs-gcp.git
 cd accelerators_accelerateurs-gcp/
 ``` 
 
@@ -63,19 +66,10 @@ cd deployment-templates/Terraform/guardrails/
 To execute the bootstrap script run the following command and populate the ENV Vars with the correct data. 
 
 ```
-DEPT_NAME=<your-department-name>
-ORG_ID=<your-gcp-org-id>
-BILLING_ID=<your-billing-id>
-sh 0-bootstrap/bootstrap.sh -d '${DEPT_NAME}' -o $ORG_ID -b '${BILLING_ID}'
+gcloud config set project your-project
+cd 0-bootstrap
+./bootstrap.sh -d dept -p your-project'
 ```
-
-To get the Organization ID you can run `gcloud organizations list`. The output should be similar to the below
-```
-DISPLAY_NAME                            ID  DIRECTORY_CUSTOMER_ID
-myorg-name  1234567891011              customerid
-```
-
-The second value(`1234567891011`) will be the Organization ID that is needed.
 
 ### Stage 1 - Common Resources
 
@@ -100,11 +94,11 @@ This stage you will deploy the resources listed below using the infrastructure a
     - Org Policies
     - Resource Location Constraint to prevent resources from being created outside of Canada
 
-To run this section you will need to adjust the generated `variables.tfvar` file to use the correct values for your department and finally run the terraform script.
+To run this section you will need to adjust the generated `variables.tfvar` file to use the correct values for your 3 group mails and run the terraform script.
 
 1. Move to the guardrails dir and prepare to edit the partially generated `variables.tfvar` file.
 ```
-cd 1-guardrails
+cd ../1-guardrails
 ```
 
 
@@ -124,12 +118,13 @@ The information that is pre-populated is just placeholder information. Change th
 | Variable  | Description  | Default  |
 |---|---|---|
 | org_id | The organization ID. | `none` |
+| audit_data_users | audit data user groupThe organization ID. | "group@email.com" |
 | billing_account | The ID of the billing account to associate this project with | "BILLING_ID" |
 | terraform_service_account | The account which terraform will use to provision the infrastructure. This will be created with the bootstrap script | "tfadmin-DEPT@SEEDPROJECT.iam.gserviceaccount.com" |
 | billing_data_users | User group who has access to view billing data | "billing-group@email.com" |
 | ssc_broker_users | User group to be used for SSC access. | "ssc-broker-group@email.com" |
 | log_export_storage_force_destroy | When deleting a bucket, this boolean option will delete all contained objects. | `true` |
-| allowed_regions | Regions that resources will be allowed to deploy to. See [here](https://cloud.google.com/compute/docs/regions-zones) for a list of GCP regions. | ["northamerica-northeast1"]  |
+| allowed_regions | Regions that resources will be allowed to deploy to. See [here](https://cloud.google.com/compute/docs/regions-zones) for a list of GCP regions. | ["northamerica-northeast1", "northamerica-northeast2"]  |
 | bucket_name | The storage bucket name to be used with the Guardrails Validation tool. This needs to be Globally Unique. | `guardrails-asset-bkt` |
 
 
