@@ -14,8 +14,8 @@ For the easiest path we recommend using Google [Cloud Shell](https://shell.cloud
 
 You can access Cloud Shell from the GCP console by clicking console icon in the top right corner.
 
-Or run the following to open the shell and auto clone
-[![Open this project in Google Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/fmichaelobrien/accelerators_accelerateurs-gcp&page=editor&tutorial=README.md)
+Or run the following to open the shell and auto clone the repo into the cloudshell_open directory off your shell user directory. 
+[![Open this project in Google Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/canada-ca/accelerators_accelerateurs-gcp&page=editor&tutorial=README.md)
 
 ![console](img/console.png)
 
@@ -23,7 +23,7 @@ This will provision an environment for you to run the commands in.
 
 ![cloudshell](img/cloudshell.png)
 
-In the new terminal run the following commands to download the accelerator repository with the bootstrap and terraform scripts.
+In the new terminal if you previosly ran the "open in cloudshell" - navigate to cloudshell_open/ or run the following commands to download the accelerator repository with the bootstrap and terraform scripts.
 ```
 git clone https://github.com/canada-ca/accelerators_accelerateurs-gcp.git
 cd accelerators_accelerateurs-gcp/
@@ -63,12 +63,12 @@ Run the following to move to the `guardrails` directory if you haven't already.
 cd deployment-templates/Terraform/guardrails/
 ```
 
-To execute the bootstrap script run the following command and populate the ENV Vars with the correct data. 
+To execute the bootstrap script run the following command and populate the environment variables "dept" and "your-project" with the correct data.  Note: try to pick a globally distinct "dept" or you may run into existing guardrails deployment conflicts with your project names.  For example "ssc" will likely be used - use ssc-dept-your_initials or ssc-com-mo for example. 
 
 ```
 gcloud config set project your-project
 cd 0-bootstrap
-./bootstrap.sh -d dept -p your-project'
+./bootstrap.sh -d dept -p your-project
 ```
 
 ### Stage 1 - Common Resources
@@ -151,6 +151,8 @@ terraform init
 terraform apply -var-file variables.tfvar
 ```
 
+If you receive a billing permissions exception - check that your user has access to assign a billing account to a project in IAM | Resource Manager at the organization level via https://console.cloud.google.com/cloud-resource-manager
+
 Once the script completes you will have the necessary resources to proceed with the guardrails installation. This process should take about 5 minutes.
 
 ## How does using this help enforce the 30 Day Guardrails?
@@ -163,4 +165,6 @@ Creates and Organization Policy to prevent resources from being deployed outside
 
 ## Next Steps
 
-Now that you have a baseline infrastructure set up for the guardrails you can now run the Guardrails Validator tool. Instructions for how to install and run the validator can be found [here](https://github.com/canada-ca/cloud-guardrails-gcp/blob/main/guardrails-validation/README.md)
+Now that you have a baseline infrastructure set up for the guardrails you can now run the Guardrails Validator tool. Instructions for how to install and run the validator can be found at [https://github.com/canada-ca/cloud-guardrails-gcp/blob/main/guardrails-validation](https://github.com/canada-ca/cloud-guardrails-gcp/blob/main/guardrails-validation/README.md).
+
+For Cloud Usage Profiles 1-6 consult [https://github.com/canada-ca/cloud-guardrails/blob/master/EN/00_Applicable-Scope.md](https://github.com/canada-ca/cloud-guardrails/blob/master/EN/00_Applicable-Scope.md)
