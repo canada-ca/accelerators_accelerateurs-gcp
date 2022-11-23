@@ -1,7 +1,7 @@
 
 # GC Accelerators (GCP)
 
-[![Open this project in Google Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/fmichaelobrien/accelerators_accelerateurs-gcp&page=editor&tutorial=README.md)
+[![Open this project in Google Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/canada-ca/accelerators_accelerateurs-gcp&page=editor&tutorial=README.md)
 
 This repository will host the required tooling for deploying a basic GCP environment to be conformant with the the Government of Canada's [Cloud Guardrails Framework](https://github.com/canada-ca/cloud-guardrails).
 
