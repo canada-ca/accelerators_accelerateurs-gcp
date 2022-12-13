@@ -133,12 +133,12 @@ The information that is pre-populated is just placeholder information. Change th
 ##### Example variables.tfvar
 Note the dept prefix was sgz via a previous ` ./bootstrap.sh -d sgz -p gr-bootstrap-sgz`
 ```
-audit_data_users="postmaster@staging.gcp.zone"
-ssc_broker_users="postmaster@staging.gcp.zone"
-org_id="221....1076"
+audit_data_users="postmaster@domain.com"
+ssc_broker_users="postmaster@domain.com"
+org_id="221....9996"
 terraform_service_account="tfadmin-sgz@sgz-seed-project.iam.gserviceaccount.com"
-billing_account="01A9CE-4....6-B44C11"
-billing_data_users="postmaster@staging.gcp.zone"
+billing_account="99A9CE-4....6-B44C99"
+billing_data_users="postmaster@domain.com"
 audit_logs_table_delete_contents_on_destroy=true
 log_export_storage_force_destroy=true
 allowed_regions=["northamerica-northeast1", "northamerica-northeast2"]
