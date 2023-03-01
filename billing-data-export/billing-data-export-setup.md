@@ -10,7 +10,7 @@ Make sure you have completed the following prerequisites:
 
 ![image](https://user-images.githubusercontent.com/100731969/222251566-47e0458e-5796-4fc4-85ff-291c9088557a.png)
 
-2. Click onn **MANAGE BILLING ACCOUNTS**.
+2. Click on **MANAGE BILLING ACCOUNTS**.
 
 ![image](https://user-images.githubusercontent.com/100731969/222252516-116b9320-6c33-4746-9742-dca59492f301.png)
 
