@@ -11,7 +11,7 @@ If the project where your billing data is being exported to is within a VPC Serv
    * Allow access to your billing data project to the BigQuery API service
    * The **add projects (id or number)** field should be filled out with your project id
 
-<img src="https://user-images.githubusercontent.com/100731969/222481066-0289afba-1aee-4b42-b1b1-62318b1e05ed.png" width=40% height=40%>
+<img src="https://user-images.githubusercontent.com/100731969/222481066-0289afba-1aee-4b42-b1b1-62318b1e05ed.png" width=50% height=50%>
 
 4. Create the following **egress** rule:
    * Allow access to the service account : *bigquery-datatransfer@poc-bigquery-dev.iam.gserviceaccount.com*
