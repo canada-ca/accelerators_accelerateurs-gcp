@@ -18,7 +18,7 @@ Make sure you have completed the following prerequisites before proceeding with 
 3. Select the corresponding billing account. Make sure that the *Billing Account ID* corresponds to the one provided to you by the Cloud Broker Service.
    Ensure that you selected the correct billing account by verifying the *account number* under **Billing account** on the top left side. 
 
-<img src="https://user-images.githubusercontent.com/100731969/222475081-1604461e-a825-4b90-b9a4-75f91c3978c1.png" width=70% height=70%>
+<img src="https://user-images.githubusercontent.com/100731969/222476310-0ceb6870-b42f-499b-b4f7-bc5f8ac2334c.png" width=70% height=70%>
 
 4. Click **Billing export** on the left hand navigation menu.
    Under **Standard usage cost**, click on the **EDIT SETTINGS** button.
