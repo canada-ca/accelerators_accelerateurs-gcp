@@ -1,16 +1,16 @@
 ## Billing Data Export Setup
 This documentation describes the steps to enable billing data export for your assigned Billing Account.
 
----
+___
 ### Note:
 Make sure you have completed the following prerequisites before proceeding with the setup:
 * Create a new project for cloud billing data purposes before proceeding with the next steps. Make sure that this project is linked to the Billing Account you will set up billing export for.
 * Enable the BigQuery Data Transfer Service API
----
+___
 
 1. Go to the left hand hamburger menu and click on **Billing**.
 
-<img src="https://user-images.githubusercontent.com/100731969/222251566-47e0458e-5796-4fc4-85ff-291c9088557a.png" width=50% height=50%>
+<img src="https://user-images.githubusercontent.com/100731969/222251566-47e0458e-5796-4fc4-85ff-291c9088557a.png" width=70% height=70% margin-left=auto>
 
 2. Click on **MANAGE BILLING ACCOUNTS**.
 
