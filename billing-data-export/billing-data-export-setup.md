@@ -36,3 +36,6 @@ Make sure you have completed the following prerequisites before proceeding with 
 
 <img src="https://user-images.githubusercontent.com/100731969/222264803-95307439-fb98-4570-8369-280f7b224e78.png" width=40% height=40%>
 
+### Disclaimer
+
+This is not an officially supported Google product.
