@@ -25,16 +25,21 @@ Make sure you have completed the following prerequisites before proceeding with 
 
 <img src="https://user-images.githubusercontent.com/100731969/222263842-792b689d-3e89-43c2-bd18-0c2cae0ce796.png" width=80% height=80%>
 
-6. In the **Projects** dropdown, select the project created for billing data purposes. 
+5. In the **Projects** dropdown, select the project created for billing data purposes. 
    In the **Dataset** dropdown, select **Create a new dataset**.
 
 <img src="https://user-images.githubusercontent.com/100731969/222263904-7f8d6897-bdf5-442b-aa22-a88b7bc635e7.png" width=80% height=80%>
 
-7. When creating the new dataset, note the following:
+6. When creating the new dataset, note the following:
    * Set **Location type** to **Region** and select *northamerica-northeast1* or *northamerica-northeast2*.
    * Make sure you select **Enable table expiration** checkbox and set it to **90 days**. This is to optimize storage and cost.
 
 <img src="https://user-images.githubusercontent.com/100731969/222264803-95307439-fb98-4570-8369-280f7b224e78.png" width=40% height=40%>
+
+7. Click **Create dataset**.
+8. Click **Save** to finalize the billing export setup.
+9. Finally, share the *dataset* name and the *project id* with the CBS team at SSC.
+
 
 ### Disclaimer
 
