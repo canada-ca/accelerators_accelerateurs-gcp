@@ -20,6 +20,9 @@ If the project where your billing data is being exported to is within a VPC Serv
 
 <img src="https://user-images.githubusercontent.com/100731969/222482784-ea443a1f-9ec3-44e2-aa51-170364d95718.png" width=40% height=40%>
 
+5. Click **Save**.
+6. Contact the CBS team to validate that they can access the billing data.
+
 ### Disclaimer
 
 This is not an officially supported Google product.
