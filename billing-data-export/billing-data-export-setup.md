@@ -1,4 +1,4 @@
-## Billing Data Export Setup
+## GCP Billing Data Export Setup
 This documentation describes the steps to enable billing data export for your assigned Billing Account.
 ***
 ### Note:
